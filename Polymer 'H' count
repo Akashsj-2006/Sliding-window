@@ -1,0 +1,56 @@
+/*You will be given a String represent the polymer (polymer is a very large molecules, called macromolecules. Which are multiples of simpler chemical units called monomers.). Polymer contains only hydrogen and carbon. And given a number k represents the length of monomer. You can pick monomer in any manner but continuously. Find the monomer contains maximum number of hydrogens.
+
+Input Format
+
+first line contains strings s
+second line contains monomer length k.
+Constraints
+
+String contains only Uppercase English letters.
+
+K>0 && K< length of String.
+
+Output Format
+
+You must return the maximum number of hydrogens contains monomer.
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Input the string and the integer k
+    string s;
+    int k;
+    cin >> s;
+    cin >> k;
+
+    
+    int current_H_count = 0;
+    for (int i = 0; i < k; ++i) {
+        if (s[i] == 'H') {
+            current_H_count++;
+        }
+    }
+
+    
+    int max_H_count = current_H_count;
+
+    
+    for (int i = k; i < s.length(); ++i) {
+      
+        if (s[i - k] == 'H') {
+            current_H_count--;
+        }
+        
+        if (s[i] == 'H') {
+            current_H_count++;
+        }
+
+        max_H_count = max(max_H_count, current_H_count);
+    }
+
+    cout << max_H_count << endl;
+
+    return 0;
+}
